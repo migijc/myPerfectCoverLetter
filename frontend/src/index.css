@@ -5,8 +5,52 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(240, 240, 240);
-  padding: 1rem;
+  -webkit-text-size-adjust: none;
+  background-color: rgb(255, 255, 255);
+  /* padding: .5rem; */
+}
+
+.App{
+  /* border: 1px solid red; */
+  min-height: 100dvh;
+  max-width: 100dvw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.blog-title-home{
+  font-size: 1rem;
+}
+
+:root{
+  font-size: .8rem;
+  --font-color-placeholder: rgb(75, 87, 78);
+  --p-gray: rgb(106,106,106);
+  --font-color-form-paragraph: #00ed81;
+  --border-color-input: rgb(221, 221, 221);
+  --border-color-focused-input: rgb(43, 229, 145);
+  /* --h1-green: linear-gradient(45deg, #00ed81,#5ce0db ,rgb(55 146 255)); */
+  --h1-green: linear-gradient(45deg, #00ed81,#5ce0bb ,rgb(55 255 200));
+
+
+  --background-dark:#585858;
+  --h2-gray: #5a5a5a;
+}
+
+#root{
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+p{
+  color: var(--p-gray);
+  font-weight: 300;
+}
+
+.home-content-header>p{
+  font-weight: 400;
+  font-size: 1.1rem;
 }
 
 *{
@@ -15,38 +59,285 @@ body {
   box-sizing: border-box;
 }
 
+header{
+  background-color:#efefef;
+  display: grid;
+  padding:  1.5rem .5rem;
+  position: relative;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-around;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-.user-form{
-  display: flex;
+.h1-green{
+  background-image: var(--h1-green);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: 2rem;
+}
+
+form{
+  display: grid;
   flex-direction: column;
-  /* gap: 2rem; */
-  /* justify-content: space-between; */
+  gap: 1.5rem;
+  padding: .5rem;
 }
 
 .user-form > div{
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   justify-content: center;
   gap: 1rem;
 }
 
-textarea{
+textarea,
+input{
   width: 100%;
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition: all .3s ease-in-out;
+  background-color: transparent !important;
+
+}
+
+/* The following code is used to prevent inputs and textarea backgrounds
+ from changing to bluish hue when user selects an auto complete option */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,  
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,  
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active{
+   -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+   -webkit-transition-delay: 9999s;
+   transition: color 9999s ease-out, background-color 9999s ease-out;
+   transition-delay: 9999s;
+}
+
+
+input:focus{
+  border-bottom: .12rem solid var(--border-color-focused-input);
+  transition: all .3s ease-in-out;
+}
+
+textarea:focus{
+  border: .12rem solid var(--border-color-focused-input);
+  transition: all .3s ease-in-out ;
+  /* height: 8rem; */
+}
+
+textarea:focus::placeholder,
+input:focus::placeholder{
+  font-weight: 600;
+}
+
+
+::placeholder{
+  color: var(--font-color-placeholder);
+  font-size: .8rem;
 }
 
 input{
+  /* height: 2rem; */
+  border: none;
+  border-bottom: .12rem solid var(--border-color-input);
+  padding: .8rem;
+}
+
+textarea{
+  /* height: 8rem; */
+  height: 100%;
+  /* transition: all .3s ease-in-out ; */
+  padding: 1rem;
+  border: .1rem solid var(--border-color-input);
+  border-radius:.35rem ;
+}
+
+button{
+  padding: 1em;
+  border-radius:.35rem ;
+  border: .12rem solid rgb(177, 177, 177);
+  background-color: transparent;
+  color: var(--background-dark);
   width: 100%;
+}
+
+.cover-letter-actions > button{
+  border-radius: 900rem;
+  height: 2.5rem;
+  border-color: none;
+  font-size: .7em;
+  background-color: #ffffff ;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+
+.form-button-container{
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  padding: .5rem;
+  position: absolute;
+  bottom: 1rem;
+  justify-self: center;
+  left:0;
+}
+
+.form-button{
+  flex-grow: 1;
+}
+
+.form-header-container,
+.page-header-container{
+  display: grid;
+  gap: .8rem;
+  /* padding: .5rem; */
+  /* height:max-content;
+  align-self: center; */
+}
+
+
+.form-header-container > p{
+  /* padding: .5rem; */
+  /* color: var(--font-color-form-paragraph); */
+  font-weight: 200;
 }
 
 .cover-letter-content{
   display: grid;
-  /* gap: 1rem; */
+  padding: 1rem;
+  font-size: .8rem;
+}
+
+.closed{
+  transition: all .3s ease-in-out;
+  transform: translateX(-100%);
+}
+
+.open{
+  transition: all .3s ease-in-out;
+  transform: translateX(0%);
+}
+
+.open-menu > div{
+  width: 100%;
+  display: grid;
+  justify-content: center;
+}
+
+.top-layer.closed{
+  transition: all .3s ease-in-out;
+  transform: translateX(500%);
+}
+
+.top-layer.open{
+  transition: all .3s ease-in-out;
+  transform: translateX(0%);
+}
+
+/* .open-menu{
+  transform: translateX(1500%) ;
 }
 
 
+
+.open-menu.open{
+  transform: translateX(0);
+} */
+
+.about-us-section-wrapper{
+  text-align: center;
+}
+
+.about-us-section-wrapper > h2{
+  color: var(--h2-gray);
+  font-size: 1rem;
+}
+
+.about-us-container{
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+} 
+
+.about-us-content{
+  display: inherit;
+  gap:2rem;
+}
+
+.link-menu-btn{
+  border: none;
+  color: white;
+  font-weight: 600;
+}
+
+.logo-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(136, 136, 136);
+  transform: rotate(40deg);
+}
+
+.logo-letter{
+  transform: rotate(-40deg) !important;
+  display: inline-block;
+  font-weight: 200;
+  font-size: 1.3em;
+}
+
+.no-docs-message > p{
+  font-weight: 500;
+  text-align: center;
+  width: 25ch;
+}
+
+.loader {
+  width: 4rem;
+  height: 4rem;
+  border: 5px solid rgb(62, 247, 173);
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+  animation: pulse 1s linear infinite;
+}
+.loader:after {
+  content: '';
+  position: absolute;
+  width: 4rem;
+  height: 4rem;
+  border: 5px solid  rgb(62, 247, 173);
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: scaleUp 1s linear infinite;
+}
+
+@keyframes scaleUp {
+  0% { transform: translate(-50%, -50%) scale(0) }
+  60% , 100% { transform: translate(-50%, -50%)  scale(1)}
+}
+@keyframes pulse {
+  0% , 60% , 100%{ transform:  scale(1) }
+  80% { transform:  scale(1.2)}
+}
 
 
 

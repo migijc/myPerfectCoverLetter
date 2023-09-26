@@ -1,11 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const getChatCompletion = require('../OpenAi').getChatCompletion
+const getChatCompletion = require('../CoverLetterAI').getChatCompletion
 
 
 router.post('/', async function(req, res){
+    
     let body = req.body
-    console.log(body)
+    // handleNewPost(body)
     const coverLetter = await getChatCompletion(body)
     res.json({"coverLetter":coverLetter})
 });

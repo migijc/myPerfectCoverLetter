@@ -5,11 +5,12 @@ function NewCoverLetter({data}){
         <div className='cover-letter-content'>{data.map((item, i)=>{
             return (
                 <span key={i}>
-                    <p >{item}</p>
+                    <p>{item}</p>
                     <br/>
                 </span>
             )
-        })}</div>
+        })}
+        </div>
     )
 
 }
